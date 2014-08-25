@@ -48,7 +48,7 @@ eventEmitter.on('listenRequest',function(request) {
     app[request.type](request.url, function(req,res){
         request.success(req,res);
     });
-});
+}); 
 
 http.listen(3000, function(){
   debug.log('listening on *:3000');
