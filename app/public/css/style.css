@@ -1,0 +1,48 @@
+body {padding: 0;margin: 0;}
+#content {display:none;}
+#game {
+    display: none;
+}
+#field {
+    border: 1px solid #ababab;
+    background: #ccc;
+    width: 500px;
+    height: 500px;
+    margin: 30px auto;
+    position: relative;
+}
+.user {
+    position: absolute;
+    margin: 0;
+    padding:10px;
+    background: green;
+}
+.user.current {
+    color: #fff;
+}
+.color:hover,.color.selected {border: 1px solid #ccc}
+
+.color {
+    float: left;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.clear {clear: both;}
+#green{background-color: green}
+#red{background-color: red}
+#blue{background-color: blue}
+#purple{background-color: purple}
+#yellow{background-color: yellow}
+
+#chess {width: 150px;height: 150px;margin: 30px auto;}
+
+#chess tr, #chess td {
+    width: 50px;
+    height: 50px;
+    border: 1px solid red;
+}
+
+#chess td:hover {
+    background: #ccc;
+}
