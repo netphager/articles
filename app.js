@@ -14,11 +14,17 @@ app.use('/public', express.static(config.appDir + '/public'));
 app.use(bodyParser.json())
 
 debug.init();
-app.get('/controller/:controller',function(req,res) {
+
+app.post('/getTemplate',function(req,res) {
+    var template = loader.loadTemplate(req.body.template);
+    res.send(template);
+});
+
+app.get('/:controller',function(req,res) {
 
     var outputHtml = '';
     var resStatus = 200;
-    var controller = loader.load(req.param('controller'));
+    var controller = loader.load(req.param('controller')/*,req.param('template')*/);
 
     if(!controller) {
         outputHtml = debug.getErrorsStr();
@@ -44,11 +50,13 @@ app.get('/controller/:controller',function(req,res) {
     debug.clearErrors();
 });
 
+
+
 eventEmitter.on('listenRequest',function(request) {
     app[request.type](request.url, function(req,res){
         request.success(req,res);
     });
-}); 
+});
 
 http.listen(3000, function(){
   debug.log('listening on *:3000');
