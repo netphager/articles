@@ -14,6 +14,7 @@ define(function(require) {
 
 
         this.about = function(params) {
+            console.log(params);
             // $template.html('about page');
         };
 
