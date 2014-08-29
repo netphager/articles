@@ -5,7 +5,7 @@ require.config({
     }
 });
 
-require(["jquery","router",window.location.pathname.split('/')[2]], function($,router,controller) {
+require(["jquery","router",window.location.pathname.split('/')[1]], function($,router,controller) {
     $(function() {
         $template = $('#template');
 

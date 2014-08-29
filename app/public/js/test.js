@@ -8,16 +8,17 @@ define(function(require) {
                 url:'/user/getUsername',
                 data: {"username":params.username}
             },function(response) {
-                $template.html('hello '+response.data);
+                console.log('hello '+response.data);
             });
         };
 
+
         this.about = function(params) {
-            $template.html('about page');
+            // $template.html('about page');
         };
 
         this.blog = function(params) {
-            $template.html('blog page');
+            // $template.html('blog page');
         };
     });
 });

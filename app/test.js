@@ -2,7 +2,6 @@ module.exports = new (function() {
     var that = this;
 
     this.init = function() {
-        // that.eventEmitter.emit('renderView');
 
         that.eventEmitter.emit('listenRequest', {
             url: '/user/getUsername/',

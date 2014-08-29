@@ -2,12 +2,31 @@ define(function() {
     return new (function() {
         var that = this;
         this.init = function(controller) {
-            var urlParams = that.getHashParams();
-            controller[urlParams.page](urlParams);
 
-            window.addEventListener("hashchange", function(e) {
+            executeMethod();
+
+            function executeMethod() {
                 var urlParams =  that.getHashParams();
-                controller[urlParams.page](urlParams);
+                var method = urlParams.method;
+                if(typeof(controller[method]) != 'function') {
+                    method = window.location.pathname.split('/')[2];
+                }
+                // load template
+                var template = method;
+                that.makeRequest({
+                    type:'post',
+                    url:'/getTemplate',
+                    data: {"template":template}
+                },function(template) {
+                    $('[main-template]').html(template);
+                    controller[method](urlParams);
+                });
+
+            }
+
+            // controller[urlParams.method](urlParams);
+            window.addEventListener("hashchange", function(e) {
+                executeMethod();
             }, false);
 
         };
