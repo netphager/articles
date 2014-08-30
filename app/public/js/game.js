@@ -6,7 +6,7 @@ define(function() {
             onlineUsers = {},
             socket;
 
-        var router = require('router');
+        // var router = require('router');
 
         this.move = function(direction) {
             var value = 30;
@@ -27,14 +27,9 @@ define(function() {
             }
         }
 
-        this.start = function() {
-            $('#signIn').hide();
-            $('#game').show();
-
-            // save username and color
-            username = $('#username').val();
-            color = $('.color.selected').attr('id');
+        this.startGame = function() {
             socket = io.connect();
+            
 
             $(document).on('keydown',function(e) {
                 switch(e.keyCode) {
@@ -107,15 +102,17 @@ define(function() {
         }
 
         this.login = function() {
-            $('#signIn').show();
-            $('#game').hide();
+            $('#saveUsername').click(function() {
+                // save username and color
+                username = $('#username').val();
+                color = $('.color.selected').attr('id');
+                window.location = "#method=startGame";
+            });
 
             $('.color').click(function() {
               $('.selected').removeClass('selected');
               $(this).addClass('selected');
             });
-
-
         };
 
     });

@@ -1,8 +1,4 @@
 body {padding: 0;margin: 0;}
-#content {display:none;}
-#game {
-    display: none;
-}
 #field {
     border: 1px solid #ababab;
     background: #ccc;
