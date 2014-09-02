@@ -8,18 +8,16 @@ define(function(require) {
                 url:'/user/getUsername',
                 data: {"username":params.username}
             },function(response) {
-                console.log('hello '+response.data);
+                $('#hello').html(response.data);
             });
         };
 
 
         this.about = function(params) {
             console.log(params);
-            // $template.html('about page');
         };
 
         this.blog = function(params) {
-            // $template.html('blog page');
         };
     });
 });
