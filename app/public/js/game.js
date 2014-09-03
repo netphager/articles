@@ -29,8 +29,6 @@ define(function() {
 
         this.startGame = function() {
             socket = io.connect();
-            
-
             $(document).on('keydown',function(e) {
                 switch(e.keyCode) {
                     // up
