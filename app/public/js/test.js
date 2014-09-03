@@ -2,36 +2,38 @@ define(function(require) {
     return new (function() {
         var router = require('router');
         var that = this;
-        this.user = null;
 
-        this.home = function(params) {
-            // console.log(this.getUser(params));
-            this.getUser(params).success(function(user) {
-                that.user = user;
+        this.signup = function(params) {
 
-                $('#hello').html('id: '+user.id+' email: '+user.email+' username:'+user.username);
-                that.getUser(params).success(function(user) {
-                    console.log(user);
-                });
-
-            });
-
-        };
-
-        this.getUser = function(params) {
-            if(this.user == null) {
-                return router.makeRequest({
+            if('username' in params && 'email' in params) {
+                router.makeRequest({
                     type:'post',
-                    url:'/user/get',
-                    data: {"username":params.username}
+                    url:'/user/add',
+                    data: {
+                        "username":params.username,
+                        "email": params.email
+                    }
+                },function(user) {
+                    console.log('successfully added user' + user);
                 });
             } else {
-                return new (function(){
-                    this.success = function(callback) {
-                        callback(that.user)
-                    }
-                });
+                console.error('invalid parameters');
             }
+        }
+
+        this.home = function(params) {
+            console.log(params);
+             router.makeRequest({
+                type:'post',
+                url:'/user/get',
+                data: {"username": ('username' in params ? params.username : null)}
+            }, function(users) {
+                var usersHtml = '';
+                for(var i in users) {
+                    usersHtml += '<p>'+users[i].id +' - '+ users[i].email  +' '+users[i].username+' </p>';
+                }
+                $('#hello').html(usersHtml);
+            });
         };
 
         this.about = function(params) {

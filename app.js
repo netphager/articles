@@ -6,19 +6,20 @@ var bodyParser = require('body-parser')
 var eventEmitter = new events.EventEmitter();
 var http = require('http').Server(app);
 
+
+
 global.config = require('./lib/config');
 global.debug = require(config.libDir+'debugger');
 var loader = require(config.libDir+'loader');
+var db = require(config.libDir+'database');
 
 app.use('/public', express.static(config.appDir + '/public'));
 app.use(bodyParser.json())
 
 debug.init();
 
-app.post('/getTemplate',function(req,res) {
-    var template = loader.loadTemplate(req.body.template);
-    res.send(template);
-});
+// connect to a database
+db.getInstance().connect('localhost');
 
 app.get('/:controller',function(req,res) {
 
@@ -49,7 +50,10 @@ app.get('/:controller',function(req,res) {
     debug.clearErrors();
 });
 
-
+app.post('/getTemplate',function(req,res) {
+    var template = loader.loadTemplate(req.body.template);
+    res.send(template);
+});
 
 eventEmitter.on('listenRequest',function(request) {
     app[request.type](request.url, function(req,res){
