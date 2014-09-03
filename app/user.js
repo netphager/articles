@@ -7,52 +7,55 @@ module.exports = new (function() {
         var schemes = require(config.databaseDir+'schemes.js');
         var mongoose = db.getInstance().mongoose;
 
-        console.log('session',session);
-        // add article
+        // login
         that.eventEmitter.emit('listenRequest', {
-            url: '/article/add/',
+            url: '/user/login/',
             type: 'post',
             success: function(req,res) {
-                var Article = mongoose.model('Article',schemes.articleSchema);
+                var User = mongoose.model('User',schemes.userSchema);
+                var filter = {};
 
-                var article = new Article({
-                    title: req.body.title,
-                    text: req.body.text
+                filter.username = req.body.username;
+                filter.password = req.body.password;
+                User.findOne(filter,function(err,user) {
+                    console.log('logged in successfully');
+                    session.isLogged = true;
+                    console.log(session);
+                    res.send(user);
                 });
-                article.save();
-                res.send(article);
             }
         });
 
-        // remove article
+
+        // add user
         that.eventEmitter.emit('listenRequest', {
-            url: '/article/remove/',
+            url: '/user/add/',
             type: 'post',
             success: function(req,res) {
-                var Article = mongoose.model('Article',schemes.articleSchema);
-                // console.log(Article);
-                // console.log(mongoose.mongo.BSONPure.ObjectID(req.body.id));
-                Article.findByIdAndRemove(new mongoose.Types.ObjectId(req.body.id),function() {
+                var User = mongoose.model('User',schemes.userSchema);
+
+                var user = new User({
+                    username: req.body.username,
+                    email: req.body.email,
+                    password: req.body.password
+                });
+                user.save();
+                res.send(user);
+            }
+        });
+
+        // remove user
+        that.eventEmitter.emit('listenRequest', {
+            url: '/user/remove/',
+            type: 'post',
+            success: function(req,res) {
+                var User = mongoose.model('User',schemes.userSchema);
+                User.findByIdAndRemove(new mongoose.Types.ObjectId(req.body.id),function() {
                     res.send(req.body.id);
                 });
             }
         });
 
-        // get articles
-        that.eventEmitter.emit('listenRequest', {
-            url: '/article/get/',
-            type: 'post',
-            success: function(req,res) {
-                var Article = mongoose.model('Article',schemes.articleSchema);
-                var filter = {};
-                if(req.body.title != null) {
-                    filter.title = req.body.title;
-                }
-                Article.find(filter,function(err,articles) {
-                    res.send(articles)
-                });
-            }
-        });
 
         // get users
         that.eventEmitter.emit('listenRequest', {

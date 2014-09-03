@@ -2,11 +2,10 @@ var path = require('path');
 var express = require('express')
 var app = express();
 var events = require('events');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var expressSession = require('express-session');
 var eventEmitter = new events.EventEmitter();
 var http = require('http').Server(app);
-
-
 
 global.config = require('./lib/config');
 global.debug = require(config.libDir+'debugger');
@@ -15,6 +14,7 @@ var db = require(config.libDir+'database');
 
 app.use('/public', express.static(config.appDir + '/public'));
 app.use(bodyParser.json())
+app.use(expressSession({secret: '123456qwerty'}));
 
 debug.init();
 
@@ -22,6 +22,8 @@ debug.init();
 db.getInstance().connect('localhost');
 
 app.get('/:controller',function(req,res) {
+    global.session = req.session;
+
 
     var outputHtml = '';
     var resStatus = 200;

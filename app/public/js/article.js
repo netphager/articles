@@ -5,25 +5,6 @@ define(function(require) {
 
         this.noTemplate = ['add','remove'];
 
-        this.signup = function(params) {
-
-            if('username' in params && 'email' in params) {
-                router.makeRequest({
-                    type:'post',
-                    url:'/user/add',
-                    data: {
-                        "username":params.username,
-                        "email": params.email
-                    }
-                },function(user) {
-                    console.log('successfully added user' + user);
-                });
-            } else {
-                console.error('invalid parameters');
-            }
-        }
-
-
         this.add = function(){
             var title = $('input[name=articleTitle]').val();
             var text = $('textarea[name=articleText]').val();
@@ -39,9 +20,9 @@ define(function(require) {
             });
         }
 
+        // remove article
         this.remove = function(params) {
             var id = params.id;
-            // remove article
              router.makeRequest({
                 type:'post',
                 url:'/article/remove',
@@ -75,7 +56,7 @@ define(function(require) {
             }, function(users) {
                 var usersHtml = '';
                 for(var i in users) {
-                    usersHtml += '<p>'+users[i].id +' - '+ users[i].email  +' '+users[i].username+' </p>';
+                    usersHtml += '<p>'+users[i].password +' - '+ users[i].email  +' '+users[i].username+' <a href="/user/#method=remove&id='+users[i]._id+'">Remove</a> </p>';
                 }
                 $('#users').html(usersHtml);
             });
@@ -83,9 +64,6 @@ define(function(require) {
 
         this.about = function(params) {
             // console.log(params);
-        };
-
-        this.blog = function(params) {
         };
     });
 });

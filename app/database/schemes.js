@@ -5,9 +5,9 @@ module.exports = new (function(){
     var ObjectId = mongoose.Schema.ObjectId;
 
     schemes.userSchema = mongoose.Schema({
-        id: Number,
-        email: String,
         username: String,
+        email: String,
+        password: String
     });
 
     schemes.articleSchema = mongoose.Schema({
