@@ -11,16 +11,21 @@ define(function() {
                 if(typeof(controller[method]) != 'function') {
                     method = window.location.pathname.split('/')[2];
                 }
-                // load template
-                var template = method;
-                that.makeRequest({
-                    type:'post',
-                    url:'/getTemplate',
-                    data: {"template":template}
-                },function(template) {
-                    $('[main-template]').html(template);
+
+                if(controller.noTemplate.indexOf(method) == -1) {
+                    // load template
+                    var template = method;
+                    that.makeRequest({
+                        type:'post',
+                        url:'/getTemplate',
+                        data: {"template":template}
+                    },function(template) {
+                        $('[main-template]').html(template);
+                        controller[method](urlParams);
+                    });
+                } else {
                     controller[method](urlParams);
-                });
+                }
 
             }
 
