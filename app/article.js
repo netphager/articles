@@ -47,11 +47,10 @@ module.exports = new (function() {
             type: 'post',
             success: function(req,res) {
                 var Article = mongoose.model('Article',schemes.articleSchema);
-                console.log(mongoose.mongo.BSONPure.ObjectID(req.body.id));
-                Article.remove({
-                    _id: mongoose.mongo.BSONPure.ObjectID(req.body.id)
-                });
-                res.send();
+                // console.log(Article);
+                // console.log(mongoose.mongo.BSONPure.ObjectID(req.body.id));
+                Article.findByIdAndRemove(new mongoose.Types.ObjectId(req.body.id));
+                res.send(req.body.id);
             }
         });
 
