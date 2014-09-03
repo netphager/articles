@@ -4,11 +4,13 @@ module.exports = new (function() {
     this.init = function() {
 
         that.eventEmitter.emit('listenRequest', {
-            url: '/user/getUsername/',
+            url: '/user/get/',
             type: 'post',
             success: function(req,res) {
                 res.send({
-                    data: req.body.username
+                    id:1,
+                    email:'netphager@gmail.com',
+                    username:req.body.username
                 });
             }
         });

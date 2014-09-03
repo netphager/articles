@@ -54,13 +54,20 @@ define(function() {
         this.makeRequest =  function(req,callback) {
             req.contentType = "application/json";
             req.data = JSON.stringify(req.data);
-            req.success = function(response) {
-                callback(response);
-            };
-            req.error = function() {
-                callback({'error': true});
-            };
-            $.ajax(req);
+            if(typeof(callback) == 'function') {
+                req.success = function(response) {
+                    callback(response);
+                };
+                req.error = function() {
+                    callback({'error': true});
+                };
+            }
+
+            var promise = $.ajax(req);
+
+            if(typeof(callback) != 'function') {
+                return promise;
+            }
         };
     })
 });

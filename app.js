@@ -12,7 +12,7 @@ var loader = require(config.libDir+'loader');
 
 app.use('/public', express.static(config.appDir + '/public'));
 app.use(bodyParser.json())
- 
+
 debug.init();
 
 app.post('/getTemplate',function(req,res) {
@@ -39,7 +39,6 @@ app.get('/:controller',function(req,res) {
         controller.http = http;
         controller.eventEmitter = eventEmitter;
         controller.render(req,res);
-
         controller.init();
 
     } else {
