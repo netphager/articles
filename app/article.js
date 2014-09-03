@@ -49,8 +49,9 @@ module.exports = new (function() {
                 var Article = mongoose.model('Article',schemes.articleSchema);
                 // console.log(Article);
                 // console.log(mongoose.mongo.BSONPure.ObjectID(req.body.id));
-                Article.findByIdAndRemove(new mongoose.Types.ObjectId(req.body.id));
-                res.send(req.body.id);
+                Article.findByIdAndRemove(new mongoose.Types.ObjectId(req.body.id),function() {
+                    res.send(req.body.id);
+                });
             }
         });
 
