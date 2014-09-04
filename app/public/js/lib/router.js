@@ -6,15 +6,15 @@ define(function() {
             executeMethod();
 
             function executeMethod() {
-                var hashArray = window.location.hash.split('/').splice(1);
-                var controller = hashArray[0];
-                var method = hashArray[1];
-                var paramsArray =  hashArray.splice(2);
-                var params = {};
+                var hashArray = window.location.hash.split('/').splice(1)
+                    ,controller = hashArray[0]
+                    ,method = hashArray[1]
+                    ,paramsArray =  hashArray.splice(2)
+                    ,params = {}
+                    ,properties = []
+                    ,values = [];
 
-                var properties = [];
-                var values = [];
-                if(paramsArray.length > 1) {
+                if(paramsArray.length > 0 && paramsArray.length % 2 == 0) {
                     for(var i in paramsArray) {
                         if(i % 2 == 0) {
                             properties.push(paramsArray[i])
@@ -22,10 +22,14 @@ define(function() {
                             values.push(paramsArray[i]);
                         }
                     }
-                }
-
-                for(var i in properties) {
-                    params[properties[i]] = typeof(values[i]) != 'undefined' ? values[i]  : null;
+                    // pushing properties and values into params
+                    for(var i in properties) {
+                        if(properties[i].length > 0 && values[i].length > 0) {
+                            params[properties[i]] = typeof(values[i]) != 'undefined' ? values[i]  : null;
+                        }
+                    }
+                } else {
+                    params.error = 'Invalid parameters';
                 }
 
                 require([controller],function(controller) {
