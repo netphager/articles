@@ -8,7 +8,6 @@ define(function(require) {
         this.add = function(){
             var title = $('input[name=articleTitle]').val();
             var text = $('textarea[name=articleText]').val();
-
             // add article
              router.makeRequest({
                 type:'post',
@@ -34,7 +33,6 @@ define(function(require) {
         };
 
         this.home = function(params) {
-
             // get articles
              router.makeRequest({
                 type:'post',

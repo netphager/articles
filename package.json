@@ -7,6 +7,9 @@
     "body-parser": "^1.6.6",
     "events": "^1.0.2",
     "express": "^4.8.6",
+    "express-session": "^1.7.6",
+    "mongodb": "^1.4.9",
+    "mongoose": "^3.8.15",
     "path": "^0.4.9",
     "socket.io": "^1.0.6"
   },
