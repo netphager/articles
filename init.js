@@ -27,16 +27,18 @@ app.get('/:controller',function(req,res) {
 
     var outputHtml = '';
     var resStatus = 200;
-    var controller = loader.load(req.param('controller')/*,req.param('template')*/);
+    var loadedModules = loader.load(req.param('controller'));
+    var controller = loadedModules.controller;
+    var layout = loadedModules.layout;
 
-    if(!controller) {
+    if(controller === false || layout === false) {
         outputHtml = debug.getErrorsStr();
-    } else {
-        if(typeof(controller.render) != 'function') {
-            debug.error('Your controller must have render method');
-            outputHtml = debug.getErrorsStr();
-        }
+    } else if(typeof(controller.render) != 'function') {
+        controller.render = function(req,res) {
+            res.send(layout);
+        };
     }
+
 
     if(debug.getErrors().length == 0) {
         controller.http = http;
@@ -53,8 +55,12 @@ app.get('/:controller',function(req,res) {
 });
 
 app.post('/getTemplate',function(req,res) {
-    var template = loader.loadTemplate(req.body.template);
-    res.send(template);
+    var outputHtml = loader.loadTemplate(req.body.template);
+    if(outputHtml === false) {
+        outputHtml = debug.getErrorsStr();
+    }
+
+    res.send(outputHtml);
 });
 
 eventEmitter.on('listenRequest',function(request) {
