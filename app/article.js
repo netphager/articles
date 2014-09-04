@@ -7,7 +7,7 @@ module.exports = new (function() {
         var schemes = require(config.databaseDir+'schemes.js');
         var mongoose = db.getInstance().mongoose;
 
-        console.log('session',session);
+        // console.log('session',session);
         // add article
         that.eventEmitter.emit('listenRequest', {
             url: '/article/add/',

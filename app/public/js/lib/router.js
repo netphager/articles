@@ -1,31 +1,32 @@
 define(function() {
     return new (function() {
         var that = this;
-        this.init = function(controller) {
+        this.init = function() {
 
             executeMethod();
 
             function executeMethod() {
-                var urlParams =  that.getHashParams();
-                var method = urlParams.method;
-                if(typeof(controller[method]) != 'function') {
-                    method = window.location.pathname.split('/')[2];
-                }
+                require([window.location.hash.split('/')[1].split('#')[0]],function(controller) {
+                    var urlParams =  that.getHashParams();
+                    var method = urlParams.method;
+                    console.log(window.location.hash.split('/')[1].split('#')[0],urlParams);
 
-                if(controller.noTemplate.indexOf(method) == -1) {
-                    // load template
-                    var template = method;
-                    that.makeRequest({
-                        type:'post',
-                        url:'/getTemplate',
-                        data: {"template":template}
-                    },function(template) {
-                        $('[main-template]').html(template);
+                    if(controller.noTemplate.indexOf(method) == -1) {
+                        // load template
+                        var template = method;
+                        that.makeRequest({
+                            type:'post',
+                            url:'/getTemplate',
+                            data: {"template":template}
+                        },function(template) {
+                            $('[main-template]').html(template);
+                            controller[method](urlParams);
+                        });
+                    } else {
                         controller[method](urlParams);
-                    });
-                } else {
-                    controller[method](urlParams);
-                }
+                    }
+
+                });
 
             }
 
@@ -48,7 +49,7 @@ define(function() {
                 a = /\+/g,  // Regex for replacing addition symbol with a space
                 r = /([^&;=]+)=?([^&;]*)/g,
                 d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
-                q = window.location.hash.substring(1);
+                q = window.location.hash.split('#')[2];
 
             while (e = r.exec(q))
                hashParams[d(e[1])] = d(e[2]);

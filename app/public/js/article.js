@@ -15,7 +15,7 @@ define(function(require) {
                 data: {"title": title,"text":text}
             }, function(article) {
                 console.log('successfully added article' + article);
-                window.location = '/article/#method=home';
+                window.location = '/app/#/article/#method=home';
             });
         }
 
@@ -28,7 +28,7 @@ define(function(require) {
                 data: {"id": id}
             }, function(article) {
                 console.log('successfully removed article ' + id);
-                window.location = '/article/#method=home';
+                window.location = '/app/#/article/#method=home';
             });
         };
 
@@ -41,7 +41,7 @@ define(function(require) {
             }, function(articles) {
                 var articlesHtml = '';
                 for(var i in articles) {
-                    articlesHtml += '<p>'+ articles[i].title  +' '+articles[i].text+' <a href="/article/#method=remove&id='+articles[i]._id+'">Remove</a></p>';
+                    articlesHtml += '<p>'+ articles[i].title  +' '+articles[i].text+' <a href="/app/#/article/#method=remove&id='+articles[i]._id+'">Remove</a></p>';
                 }
                 $('#articles').html(articlesHtml);
             });
@@ -54,7 +54,7 @@ define(function(require) {
             }, function(users) {
                 var usersHtml = '';
                 for(var i in users) {
-                    usersHtml += '<p>'+users[i].password +' - '+ users[i].email  +' '+users[i].username+' <a href="/user/#method=remove&id='+users[i]._id+'">Remove</a> </p>';
+                    usersHtml += '<p>'+users[i].password +' - '+ users[i].email  +' '+users[i].username+' <a href="/app/#/user/#method=remove&id='+users[i]._id+'">Remove</a> </p>';
                 }
                 $('#users').html(usersHtml);
             });

@@ -19,11 +19,12 @@ define(function(require) {
                 }
             },function(user) {
                 console.log('successfully added user' + user);
+                window.location = '/app/#/article/#method=home';
             });
         };
 
         this.signin = function() {
-            
+
         };
 
         this.login = function() {
@@ -38,7 +39,7 @@ define(function(require) {
                     "password":password
                 }
             },function(user) {
-                window.location = '/article/#method=home';
+                window.location = '/app/#/article/#method=home';
             });
         };
 
@@ -50,10 +51,10 @@ define(function(require) {
                 data: {"id": id}
             }, function(article) {
                 console.log('successfully removed article ' + id);
-                window.location = '/article/#method=home';
+                window.location = '/app/#/article/#method=home';
             });
         };
-    
+
         this.signup = function(params) {
 
         }
