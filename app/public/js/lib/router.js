@@ -6,10 +6,30 @@ define(function() {
             executeMethod();
 
             function executeMethod() {
-                require([window.location.hash.split('/')[1].split('#')[0]],function(controller) {
-                    var urlParams =  that.getHashParams();
-                    var method = urlParams.method;
-                    console.log(window.location.hash.split('/')[1].split('#')[0],urlParams);
+                var hashArray = window.location.hash.split('/').splice(1);
+                var controller = hashArray[0];
+                var method = hashArray[1];
+                var paramsArray =  hashArray.splice(2);
+                var params = {};
+
+                var properties = [];
+                var values = [];
+                if(paramsArray.length > 1) {
+                    for(var i in paramsArray) {
+                        if(i % 2 == 0) {
+                            properties.push(paramsArray[i])
+                        } else {
+                            values.push(paramsArray[i]);
+                        }
+                    }
+                }
+
+                for(var i in properties) {
+                    params[properties[i]] = typeof(values[i]) != 'undefined' ? values[i]  : null;
+                }
+
+
+                require([controller],function(controller) {
 
                     if(controller.noTemplate.indexOf(method) == -1) {
                         // load template
@@ -20,17 +40,16 @@ define(function() {
                             data: {"template":template}
                         },function(template) {
                             $('[main-template]').html(template);
-                            controller[method](urlParams);
+                            controller[method](params);
                         });
                     } else {
-                        controller[method](urlParams);
+                        controller[method](params);
                     }
 
                 });
 
             }
 
-            // controller[urlParams.method](urlParams);
             window.addEventListener("hashchange", function(e) {
                 executeMethod();
             }, false);

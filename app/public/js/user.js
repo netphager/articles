@@ -19,7 +19,7 @@ define(function(require) {
                 }
             },function(user) {
                 console.log('successfully added user' + user);
-                window.location = '/app/#/article/#method=home';
+                window.location = '/app/#/article/home';
             });
         };
 
@@ -39,7 +39,7 @@ define(function(require) {
                     "password":password
                 }
             },function(user) {
-                window.location = '/app/#/article/#method=home';
+                window.location = '/app/#/article/home';
             });
         };
 
@@ -51,7 +51,7 @@ define(function(require) {
                 data: {"id": id}
             }, function(article) {
                 console.log('successfully removed article ' + id);
-                window.location = '/app/#/article/#method=home';
+                window.location = '/app/#/article/home';
             });
         };
 
