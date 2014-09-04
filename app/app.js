@@ -1,14 +1,15 @@
 module.exports = new (function() {
     var that = this;
 
-    this.init = function() {
+    var modules = ['user','article'];
 
-        var user = require(config.appDir+'user');
-        var article = require(config.appDir+'article');
-        user.eventEmitter = that.eventEmitter;
-        article.eventEmitter = that.eventEmitter;
-        user.init();
-        article.init();
+    this.init = function() {
+        // loading modules from modules array
+        for(var i in modules) {
+            var module = require(config.appDir+modules[i]);
+            module.app = that;
+            module.init();
+        }
     }
 
 });

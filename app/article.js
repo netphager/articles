@@ -9,7 +9,7 @@ module.exports = new (function() {
 
         // console.log('session',session);
         // add article
-        that.eventEmitter.emit('listenRequest', {
+        that.app.eventEmitter.emit('listenRequest', {
             url: '/article/add/',
             type: 'post',
             success: function(req,res) {
@@ -25,7 +25,7 @@ module.exports = new (function() {
         });
 
         // remove article
-        that.eventEmitter.emit('listenRequest', {
+        that.app.eventEmitter.emit('listenRequest', {
             url: '/article/remove/',
             type: 'post',
             success: function(req,res) {
@@ -39,7 +39,7 @@ module.exports = new (function() {
         });
 
         // get articles
-        that.eventEmitter.emit('listenRequest', {
+        that.app.eventEmitter.emit('listenRequest', {
             url: '/article/get/',
             type: 'post',
             success: function(req,res) {
@@ -55,7 +55,7 @@ module.exports = new (function() {
         });
 
         // get users
-        that.eventEmitter.emit('listenRequest', {
+        that.app.eventEmitter.emit('listenRequest', {
             url: '/user/get/',
             type: 'post',
             success: function(req,res) {

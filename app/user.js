@@ -8,7 +8,7 @@ module.exports = new (function() {
         var mongoose = db.getInstance().mongoose;
 
         // login
-        that.eventEmitter.emit('listenRequest', {
+        that.app.eventEmitter.emit('listenRequest', {
             url: '/user/login/',
             type: 'post',
             success: function(req,res) {
@@ -28,7 +28,7 @@ module.exports = new (function() {
 
 
         // add user
-        that.eventEmitter.emit('listenRequest', {
+        that.app.eventEmitter.emit('listenRequest', {
             url: '/user/add/',
             type: 'post',
             success: function(req,res) {
@@ -45,7 +45,7 @@ module.exports = new (function() {
         });
 
         // remove user
-        that.eventEmitter.emit('listenRequest', {
+        that.app.eventEmitter.emit('listenRequest', {
             url: '/user/remove/',
             type: 'post',
             success: function(req,res) {
@@ -58,7 +58,7 @@ module.exports = new (function() {
 
 
         // get users
-        that.eventEmitter.emit('listenRequest', {
+        that.app.eventEmitter.emit('listenRequest', {
             url: '/user/get/',
             type: 'post',
             success: function(req,res) {
