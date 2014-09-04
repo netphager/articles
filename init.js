@@ -27,9 +27,10 @@ app.get('/:controller',function(req,res) {
 
     var outputHtml = '';
     var resStatus = 200;
-    var loadedModules = loader.load(req.param('controller'));
-    var controller = loadedModules.controller;
-    var layout = loadedModules.layout;
+    // load controller
+    var controller = loader.loadController(req.param('controller'));
+    // load layout
+    var layout = loader.loadLayout();
 
     if(controller === false || layout === false) {
         outputHtml = debug.getErrorsStr();
