@@ -15,7 +15,7 @@ define(function(require) {
                 data: {"title": title,"text":text}
             }, function(article) {
                 console.log('successfully added article' + article);
-                // window.location = '/app/#/article/home';
+                window.location = '/app/#/article/home';
             });
         }
 

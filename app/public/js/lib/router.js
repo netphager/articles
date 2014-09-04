@@ -28,9 +28,7 @@ define(function() {
                     params[properties[i]] = typeof(values[i]) != 'undefined' ? values[i]  : null;
                 }
 
-
                 require([controller],function(controller) {
-
                     if(controller.noTemplate.indexOf(method) == -1) {
                         // load template
                         var template = method;
@@ -45,35 +43,13 @@ define(function() {
                     } else {
                         controller[method](params);
                     }
-
                 });
-
             }
 
             window.addEventListener("hashchange", function(e) {
                 executeMethod();
             }, false);
 
-        };
-
-        this.redirect = function(url) {
-       /*     var link = '<a id="redirectLink" href="#page='+url+'"></a>';
-            $('body').append(link);
-            $('#redirectLink').click();*/
-        };
-
-        this.getHashParams = function() {
-            var hashParams = {};
-            var e,
-                a = /\+/g,  // Regex for replacing addition symbol with a space
-                r = /([^&;=]+)=?([^&;]*)/g,
-                d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
-                q = window.location.hash.split('#')[2];
-
-            while (e = r.exec(q))
-               hashParams[d(e[1])] = d(e[2]);
-
-            return hashParams;
         };
 
         this.makeRequest =  function(req,callback) {
