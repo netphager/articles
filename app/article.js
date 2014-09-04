@@ -7,7 +7,6 @@ module.exports = new (function() {
         var schemes = require(config.databaseDir+'schemes.js');
         var mongoose = db.getInstance().mongoose;
 
-        // console.log('session',session);
         // add article
         that.app.eventEmitter.emit('listenRequest', {
             url: '/article/add/',
@@ -38,6 +37,58 @@ module.exports = new (function() {
             }
         });
 
+        // show article
+        that.app.eventEmitter.emit('listenRequest', {
+            url: '/article/show/',
+            type: 'post',
+            success: function(req, res) {
+                var Article = mongoose.model('Article',schemes.articleSchema);
+                var id;
+                if(req.body.id != null) {
+                    id = new mongoose.Types.ObjectId(req.body.id);
+                }
+                Article.findById(id,function(err,article) {
+                    console.log(article);
+                    res.send(article)
+                });
+            }
+        });
+
+
+        // edit article
+        that.app.eventEmitter.emit('listenRequest', {
+            url: '/article/update/',
+            type: 'post',
+            success: function(req, res) {
+                var Article = mongoose.model('Article',schemes.articleSchema);
+                var id;
+                if(req.body.id != null) {
+                    id = new mongoose.Types.ObjectId(req.body.id);
+                }
+                Article.findById(id,function(err,article) {
+                    console.log(article);
+                    res.send(article)
+                });
+            }
+        });
+
+        // update article
+        that.app.eventEmitter.emit('listenRequest', {
+            url: '/article/update/',
+            type: 'post',
+            success: function(req, res) {
+                var Article = mongoose.model('Article',schemes.articleSchema);
+                var id;
+                if(req.body.id != null) {
+                    id = new mongoose.Types.ObjectId(req.body.id);
+                }
+                Article.findById(id,function(err,article) {
+                    console.log(article);
+                    res.send(article)
+                });
+            }
+        });
+
         // get articles
         that.app.eventEmitter.emit('listenRequest', {
             url: '/article/get/',
@@ -50,22 +101,6 @@ module.exports = new (function() {
                 }
                 Article.find(filter,function(err,articles) {
                     res.send(articles)
-                });
-            }
-        });
-
-        // get users
-        that.app.eventEmitter.emit('listenRequest', {
-            url: '/user/get/',
-            type: 'post',
-            success: function(req,res) {
-                var User = mongoose.model('User',schemes.userSchema);
-                var filter = {};
-                if(req.body.username != null) {
-                    filter.username = req.body.username;
-                }
-                User.find(filter,function(err,users) {
-                    res.send(users)
                 });
             }
         });

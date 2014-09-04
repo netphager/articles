@@ -32,8 +32,44 @@ define(function(require) {
             });
         };
 
+        // show article
+        this.show = function(params) {
+            var id = params.id;
+             router.makeRequest({
+                type:'post',
+                url:'/article/show',
+                data: {"id": id}
+            }, function(article) {
+                $('#article').html('<h2>'+article.title+'</h2><p>'+ article.text+'</p>');
+            });  
+        };
+
+        // edit article        
+        this.edit = function(params) {
+            var id = params.id;
+            router.makeRequest({
+                type:'post',
+                url:'/article/edit',
+                data: {"id": id}
+            }, function(article) {
+                console.log('successfully edited article '+ params.id);
+            });  
+        };
+
+        // update article
+        this.update = function(params) {
+            var id = params.id;
+            router.makeRequest({
+                type:'post',
+                url:'/article/update',
+                data: {"id": id}
+            }, function(article) {
+                console.log(article);
+                // $('#article').html('<h2>'+article.title+'</h2><p>'+ article.text+'</p>');
+            });
+        };
+
         this.home = function(params) {
-            console.log(params);
             // get articles
              router.makeRequest({
                 type:'post',
@@ -42,7 +78,7 @@ define(function(require) {
             }, function(articles) {
                 var articlesHtml = '';
                 for(var i in articles) {
-                    articlesHtml += '<p>'+ articles[i].title  +' '+articles[i].text+' <a href="/app/#/article/remove/id/'+articles[i]._id+'">Remove</a></p>';
+                    articlesHtml += '<p>'+ articles[i].title  +' '+articles[i].text+' <a href="/app/#/article/show/id/'+articles[i]._id+'">Show</a> <a href="/app/#/article/remove/id/'+articles[i]._id+'">Remove</a></p>';
                 }
                 $('#articles').html(articlesHtml);
             });
