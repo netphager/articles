@@ -1,4 +1,6 @@
-body {padding: 0;margin: 0;}
+body {padding: 0;margin: 0;background: #616161;color:#ccc;}
+a {color: #ccc;}
+a:hover {color: green;}
 #field {
     border: 1px solid #ababab;
     background: #ccc;

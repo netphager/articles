@@ -7,7 +7,7 @@ define(function() {
 
             function executeMethod() {
                 var hashArray = window.location.hash.split('/').splice(1)
-                    ,controller = hashArray[0]
+                    ,controllerName = hashArray[0]
                     ,method = hashArray[1]
                     ,paramsArray =  hashArray.splice(2)
                     ,params = {}
@@ -32,14 +32,14 @@ define(function() {
                     params.error = 'Invalid parameters';
                 }
 
-                require([controller],function(controller) {
+                require([controllerName],function(controller) {
                     if(controller.noTemplate.indexOf(method) == -1) {
                         // load template
                         var template = method;
                         that.makeRequest({
                             type:'post',
                             url:'/loadTemplate',
-                            data: {"templateName":template}
+                            data: {"templateName":template,"controllerName":controllerName}
                         },function(template) {
                             $('[main-template]').html(template);
                             controller[method](params);

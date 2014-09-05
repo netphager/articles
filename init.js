@@ -67,7 +67,7 @@ for(var i in config.controllers) {
 */
 
 app.post('/loadTemplate',function(req,res) {
-    var outputHtml = loader.loadTemplate(req.body.templateName);
+    var outputHtml = loader.loadTemplate(req.body.templateName,req.body.controllerName);
     if(outputHtml === false) {
         outputHtml = debug.getErrorsStr();
     }

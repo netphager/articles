@@ -7,11 +7,7 @@ require.config({
 
 require(["jquery","router"], function($,router) {
     $(function() {
-        $template = $('#template');
-
         router.init();
-
-        $template.show();
     });
 
 });
