@@ -1,9 +1,6 @@
 module.exports = new (function() {
     var that = this;
-
-    this.init = function() {
-        console.log('user');
-    };
+    this.init = function() {};
 
     // require db and schemes
     var db = require(config.libDir+'database');
@@ -24,13 +21,6 @@ module.exports = new (function() {
             res.send(user);
         });
     }
-    // that.eventEmitter.emit('listenRequest', {
-    //     url: '/user/login/',
-    //     type: 'post',
-    //     success: function(req,res) {
-    //     }
-    // });
-
 
     // add user
     this.add = function(req,res) {
@@ -44,12 +34,7 @@ module.exports = new (function() {
         user.save();
         res.send(user);
     }
-/*        that.eventEmitter.emit('listenRequest', {
-        url: '/user/add/',
-        type: 'post',
-        success: function(req,res) {
-        }
-    });*/
+
 
     // remove user
     this.remove = function(req,res) {
@@ -58,13 +43,6 @@ module.exports = new (function() {
             res.send(req.body.id);
         });
     }
-    // that.eventEmitter.emit('listenRequest', {
-    //     url: '/user/remove/',
-    //     type: 'post',
-    //     success: function(req,res) {
-    //     }
-    // });
-
 
     // get users
     this.get = function(req,res) {
@@ -77,12 +55,4 @@ module.exports = new (function() {
             res.send(users)
         });
     };
-
-/*        that.eventEmitter.emit('listenRequest', {
-        url: '/user/get/',
-        type: 'post',
-        success: function(req,res) {
-        }
-    });*/
-
 });

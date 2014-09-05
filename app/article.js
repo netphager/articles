@@ -1,8 +1,7 @@
 module.exports = new (function() {
     var that = this;
-    this.init = function() {
+    this.init = function() {};
 
-    };
     // require db and schemes
     var db = require(config.libDir+'database');
     var schemes = require(config.databaseDir+'schemes.js');

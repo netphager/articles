@@ -9,7 +9,7 @@ define(function(require) {
             var title = $('input[name=articleTitle]').val();
             var text = $('textarea[name=articleText]').val();
             // add article
-             router.makeRequest({
+            router.makeRequest({
                 type:'post',
                 url:'/article/add',
                 data: {"title": title,"text":text}
@@ -20,7 +20,7 @@ define(function(require) {
         }
 
         this.test = function(params) {
-             router.makeRequest({
+            router.makeRequest({
                 type:'post',
                 url:'/article/test',
                 data: {
@@ -37,7 +37,7 @@ define(function(require) {
         // remove article
         this.remove = function(params) {
             var id = params.id;
-             router.makeRequest({
+            router.makeRequest({
                 type:'post',
                 url:'/article/remove',
                 data: {"id": id}
@@ -50,7 +50,7 @@ define(function(require) {
         // show article
         this.show = function(params) {
             var id = params.id;
-             router.makeRequest({
+            router.makeRequest({
                 type:'post',
                 url:'/article/show',
                 data: {"id": id}
@@ -86,7 +86,7 @@ define(function(require) {
 
         this.home = function(params) {
             // get articles
-             router.makeRequest({
+            router.makeRequest({
                 type:'post',
                 url:'/article/get',
                 data: {"title": ('title' in params ? params.title : null)}
