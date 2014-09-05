@@ -32,22 +32,34 @@ define(function() {
                     params.error = 'Invalid parameters';
                 }
 
-                require([controller],function(controller) {
-                    if(controller.noTemplate.indexOf(method) == -1) {
-                        // load template
-                        var template = method;
-                        that.makeRequest({
-                            type:'post',
-                            url:'/getTemplate',
-                            data: {"template":template}
-                        },function(template) {
-                            $('[main-template]').html(template);
+
+                // load controller
+                /*that.makeRequest({
+                    type:'post',
+                    url:'/loadController',
+                    data: {"controllerName":controller}
+                },function(response) {
+*/
+                    require([controller],function(controller) {
+                        if(controller.noTemplate.indexOf(method) == -1) {
+                            // load template
+                            var template = method;
+                            that.makeRequest({
+                                type:'post',
+                                url:'/loadTemplate',
+                                data: {"templateName":template}
+                            },function(template) {
+                                $('[main-template]').html(template);
+                                controller[method](params);
+                            });
+                        } else {
                             controller[method](params);
-                        });
-                    } else {
-                        controller[method](params);
-                    }
-                });
+                        }
+                    });
+
+                // });
+
+
             }
 
             window.addEventListener("hashchange", function(e) {

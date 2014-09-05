@@ -3,7 +3,7 @@ define(function(require) {
         var router = require('router');
         var that = this;
 
-        this.noTemplate = ['add','remove'];
+        this.noTemplate = ['add','remove','test'];
 
         this.add = function(){
             var title = $('input[name=articleTitle]').val();
@@ -18,6 +18,21 @@ define(function(require) {
                 window.location = '/app/#/article/home';
             });
         }
+
+        this.test = function(params) {
+             router.makeRequest({
+                type:'post',
+                url:'/article/test',
+                data: {
+                    "param1": 'test1',
+                    "param2": 'test2',
+                    "param3": 'test3',
+                    "param4": 'test4'
+                }
+            }, function(response) {
+                console.log(response);
+            });
+        };
 
         // remove article
         this.remove = function(params) {
@@ -41,10 +56,10 @@ define(function(require) {
                 data: {"id": id}
             }, function(article) {
                 $('#article').html('<h2>'+article.title+'</h2><p>'+ article.text+'</p>');
-            });  
+            });
         };
 
-        // edit article        
+        // edit article
         this.edit = function(params) {
             var id = params.id;
             router.makeRequest({
@@ -53,7 +68,7 @@ define(function(require) {
                 data: {"id": id}
             }, function(article) {
                 console.log('successfully edited article '+ params.id);
-            });  
+            });
         };
 
         // update article
@@ -84,7 +99,7 @@ define(function(require) {
             });
 
             // get users
-             router.makeRequest({
+             /*router.makeRequest({
                 type:'post',
                 url:'/user/get',
                 data: {"username": ('username' in params ? params.username : null)}
@@ -94,7 +109,7 @@ define(function(require) {
                     usersHtml += '<p>'+users[i].password +' - '+ users[i].email  +' '+users[i].username+' <a href="/app/#/user/remove/id/'+users[i]._id+'">Remove</a> </p>';
                 }
                 $('#users').html(usersHtml);
-            });
+            });*/
         };
 
         this.about = function(params) {
