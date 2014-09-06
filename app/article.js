@@ -7,16 +7,6 @@ module.exports = new (function() {
     var schemes = require(config.databaseDir+'schemes.js');
     var mongoose = db.getInstance().mongoose;
 
-
-    this.test = function(req,res) {
-        res.send({
-            "param1": req.body.param1,
-            "param2": req.body.param2,
-            "param3": req.body.param3,
-            "param4": req.body.param4
-        });
-    };
-
     // add article
     this.add = function(req,res) {
         var Article = mongoose.model('Article',schemes.articleSchema);
@@ -44,33 +34,34 @@ module.exports = new (function() {
             id = new mongoose.Types.ObjectId(req.body.id);
         }
         Article.findById(id,function(err,article) {
-            res.send(article)
+            res.send(article);
         });
     };
 
     // edit article
-    this.edit = function() {
+    this.edit = function(req,res) {
         var Article = mongoose.model('Article',schemes.articleSchema);
         var id;
         if(req.body.id != null) {
             id = new mongoose.Types.ObjectId(req.body.id);
         }
         Article.findById(id,function(err,article) {
-            console.log(article);
-            res.send(article)
+            res.send(article);
         });
     };
 
     // update article
-    this.update = function() {
+    this.update = function(req,res) {
         var Article = mongoose.model('Article',schemes.articleSchema);
         var id;
         if(req.body.id != null) {
             id = new mongoose.Types.ObjectId(req.body.id);
         }
         Article.findById(id,function(err,article) {
-            console.log(article);
-            res.send(article)
+            article.title = req.body.title;
+            article.text = req.body.text;
+            article.save();
+            res.send(article);
         });
     };
 
@@ -82,7 +73,7 @@ module.exports = new (function() {
             filter.title = req.body.title;
         }
         Article.find(filter,function(err,articles) {
-            res.send(articles)
+            res.send(articles);
         });
     };
 

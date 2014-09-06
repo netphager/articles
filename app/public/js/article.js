@@ -3,9 +3,13 @@ define(function(require) {
         var router = require('router');
         var that = this;
 
-        this.noTemplate = ['add','remove','test'];
+        this.noTemplate = ['save','remove','test','update'];
 
-        this.add = function(){
+        this.add = function() {
+
+        };
+
+        this.save = function(){
             var title = $('input[name=articleTitle]').val();
             var text = $('textarea[name=articleText]').val();
             // add article
@@ -18,21 +22,6 @@ define(function(require) {
                 window.location = '/app/#/article/home';
             });
         }
-
-        this.test = function(params) {
-            router.makeRequest({
-                type:'post',
-                url:'/article/test',
-                data: {
-                    "param1": 'test1',
-                    "param2": 'test2',
-                    "param3": 'test3',
-                    "param4": 'test4'
-                }
-            }, function(response) {
-                console.log(response);
-            });
-        };
 
         // remove article
         this.remove = function(params) {
@@ -67,20 +56,28 @@ define(function(require) {
                 url:'/article/edit',
                 data: {"id": id}
             }, function(article) {
-                console.log('successfully edited article '+ params.id);
+                $('input[name=title]').val(article.title);
+                $('textarea[name=text]').val(article.text);
+                $('a.saveArticle').attr('href','/app/#/article/update/id/'+article._id);
             });
         };
 
         // update article
         this.update = function(params) {
             var id = params.id;
+            var title = $('input[name=title]').val();
+            var text = $('textarea[name=text]').val();
             router.makeRequest({
                 type:'post',
                 url:'/article/update',
-                data: {"id": id}
+                data: {
+                    "id": id,
+                    "title": title,
+                    "text": text
+                }
             }, function(article) {
-                console.log(article);
-                // $('#article').html('<h2>'+article.title+'</h2><p>'+ article.text+'</p>');
+                console.log('successfully updated article '+ article._id);
+                window.location = '/app/#/article/home';
             });
         };
 
@@ -93,7 +90,8 @@ define(function(require) {
             }, function(articles) {
                 var articlesHtml = '';
                 for(var i in articles) {
-                    articlesHtml += '<p>'+ articles[i].title  +' '+articles[i].text+' <a href="/app/#/article/show/id/'+articles[i]._id+'">Show</a> <a href="/app/#/article/remove/id/'+articles[i]._id+'">Remove</a></p>';
+                    articlesHtml += '<div class="article" style="margin:30px;"><p>'+ articles[i].title  +'<br /> '+articles[i].text+'</p> <a href="/app/#/article/show/id/'+articles[i]._id+'">Show</a>'+
+                    ' <a href="/app/#/article/edit/id/'+articles[i]._id+'">Edit</a> <a href="/app/#/article/remove/id/'+articles[i]._id+'">Remove</a></div><hr />';
                 }
                 $('#articles').html(articlesHtml);
             });
