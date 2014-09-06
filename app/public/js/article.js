@@ -99,7 +99,7 @@ define(function(require) {
             });
 
             // get users
-             /*router.makeRequest({
+             router.makeRequest({
                 type:'post',
                 url:'/user/get',
                 data: {"username": ('username' in params ? params.username : null)}
@@ -109,7 +109,7 @@ define(function(require) {
                     usersHtml += '<p>'+users[i].password +' - '+ users[i].email  +' '+users[i].username+' <a href="/app/#/user/remove/id/'+users[i]._id+'">Remove</a> </p>';
                 }
                 $('#users').html(usersHtml);
-            });*/
+            });
         };
 
         this.about = function(params) {
