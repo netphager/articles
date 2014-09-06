@@ -5,10 +5,12 @@ define(function(require) {
 
         this.noTemplate = ['save','remove','test','update'];
 
+        // add article
         this.add = function() {
 
         };
 
+        // save article
         this.save = function(){
             var title = $('input[name=articleTitle]').val();
             var text = $('textarea[name=articleText]').val();

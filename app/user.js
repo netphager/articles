@@ -16,11 +16,15 @@ module.exports = new (function() {
         filter.password = req.body.password;
         User.findOne(filter,function(err,user) {
             console.log('logged in successfully');
-            session.isLogged = true;
-            console.log(session);
+            req.session.isLogged = true;
             res.send(user);
         });
-    }
+    };
+
+    this.logout = function(req,res) {
+        req.session.isLogged = false;
+        res.send();
+    };
 
     // add user
     this.add = function(req,res) {

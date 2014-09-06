@@ -22,9 +22,7 @@ debug.init();
 db.getInstance().connect('localhost');
 
 app.get('/'+config.mainApp,function(req,res) {
-
-    global.session = req.session;
-
+    // req.session.isLogged = false;
     var outputHtml = '';
     var resStatus = 200;
     // load layout
@@ -45,13 +43,21 @@ var loadedControllers = {};
 for(var i in config.controllers) {
     app.all('/'+config.controllers[i]+'/:method', function(req,res) {
         var controllerName = req.url.split('/')[1];
+        var method = req.param('method');
+
+        if(!req.session.isLogged && config.freeLoginPages.indexOf(method) == -1) {
+            // console.log(config.freeLoginPages,method)
+            res.status(303);
+            res.send({'redirect': '/app/#/user/signin'});
+            return false;
+        }
 
         if(!(controllerName in loadedControllers)) {
             loadedControllers[controllerName] = loader.loadController(controllerName);
             console.log('loading controller ' + controllerName);
         }
 
-        loadedControllers[controllerName][req.param('method')](req,res);
+        loadedControllers[controllerName][method](req,res);
     });
 }
 

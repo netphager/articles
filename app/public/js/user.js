@@ -3,7 +3,7 @@ define(function(require) {
         var router = require('router');
         var that = this;
 
-        this.noTemplate = ['add','remove','login'];
+        this.noTemplate = ['add','remove','login','logout'];
         this.add = function() {
             var username = $('input[name=username]').val()
             var email = $('input[name=email]').val();
@@ -41,6 +41,15 @@ define(function(require) {
             },function(user) {
                 window.location = '/app/#/article/home';
             });
+        };
+
+        this.logout = function() {
+            router.makeRequest({
+                type:'post',
+                url:'/user/logout'
+            },function() {
+                window.location = '/app/#/user/signin';
+            });  
         };
 
         this.remove = function(params) {
