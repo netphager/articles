@@ -7,7 +7,7 @@ var expressSession = require('express-session');
 var eventEmitter = new events.EventEmitter();
 var http = require('http').Server(app);
 
-global.config = require('./lib/config');
+global.config = require('./config');
 global.debug = require(config.libDir+'debugger');
 var loader = require(config.libDir+'loader');
 var db = require(config.libDir+'database');
@@ -22,9 +22,7 @@ debug.init();
 db.getInstance().connect('localhost');
 
 app.get('/'+config.mainApp,function(req,res) {
-    /*if(config.controllers.indexOf(req.param('controller')) == -1) {
-        res.send();
-    }*/
+
     global.session = req.session;
 
     var outputHtml = '';
@@ -57,14 +55,10 @@ for(var i in config.controllers) {
     });
 }
 
-/*app.post('/loadController',function(req,res) {
-    var controller = loader.loadController(req.body.controllerName);
-    controller.http = http;
-    controller.eventEmitter = eventEmitter;
-    controller.init();
-    res.send();
+app.get('/router.js', function(req,res) {
+    var fs = require('fs');
+    res.send(fs.readFileSync(config.libDir+'router.js', 'utf-8'));
 });
-*/
 
 app.post('/loadTemplate',function(req,res) {
     var outputHtml = loader.loadTemplate(req.body.templateName,req.body.controllerName);

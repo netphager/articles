@@ -8,7 +8,8 @@ module.exports = new (function(){
 /*    this.rootDir = 'D:\\work\\node';
     this.appDir = 'D:\\work\\node\\app\\';*/
     this.databaseDir = path.join(that.appDir,'database/');
-    this.libDir = path.join(that.rootDir, 'lib/');
+    // this.libDir = path.join(that.rootDir, 'lib/');
+    this.libDir = path.join('/store/Dropbox/www/framework/');
     this.templatesDir = path.join(that.appDir, 'templates/{controller}/');
 
     /* PROPERTIES */

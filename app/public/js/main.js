@@ -1,7 +1,7 @@
 require.config({
     paths: {
         jquery: '/public/js/lib/jquery',
-        router: '/public/js/lib/router',
+        router: '/router',
     }
 });
 
