@@ -62,12 +62,25 @@ for(var i in config.controllers) {
 }
 
 app.get('/router.js', function(req,res) {
+    console.log(req.url.split('/'));
     var fs = require('fs');
     res.send(fs.readFileSync(config.libDir+'router.js', 'utf-8'));
 });
 
 app.post('/loadTemplate',function(req,res) {
-    var outputHtml = loader.loadTemplate(req.body.templateName,req.body.controllerName);
+
+    var controllerName = req.body.controllerName;
+    var templateName = req.body.templateName;
+    var method = req.body.method;
+
+    if(!req.session.isLogged && config.freeLoginPages.indexOf(method) == -1) {
+        // console.log(config.freeLoginPages,method)
+        res.status(303);
+        res.send({'redirect': '/app/#/user/signin'});
+        return false;
+    }
+
+    var outputHtml = loader.loadTemplate(templateName,controllerName);
     if(outputHtml === false) {
         outputHtml = debug.getErrorsStr();
     }
