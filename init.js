@@ -62,7 +62,6 @@ for(var i in config.controllers) {
 }
 
 app.get('/router.js', function(req,res) {
-    console.log(req.url.split('/'));
     var fs = require('fs');
     res.send(fs.readFileSync(config.libDir+'router.js', 'utf-8'));
 });
