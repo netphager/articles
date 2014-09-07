@@ -15,5 +15,11 @@ module.exports = new (function(){
     /* PROPERTIES */
     this.mainApp = 'app';
     this.controllers = ['user','article','test'];
-    this.freeLoginPages = ['login','signin']
+    
+    this.loginConfig = {
+        requireLogin: true,
+        freeLoginPages: ['login','signin'],
+        loginRedirect: '/app/#/user/signin'
+    };
+
 });
