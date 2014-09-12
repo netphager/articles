@@ -21,6 +21,7 @@ define(function(require) {
                 type:'post',
                 url:'/article/add',
                 data: {"title": title,"text":text}
+
             }, function(article) {
                 console.log('successfully added article' + article);
                 window.location = '/app/#/article/home';
