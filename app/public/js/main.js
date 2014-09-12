@@ -1,11 +1,11 @@
 require.config({
     paths: {
         jquery: '/public/js/lib/jquery',
-        router: '/router',
+        helper: '/helper',
     }
 });
 
-require(["jquery","router"], function($,router) {
+require(["jquery","helper/router"], function($,router) {
     $(function() {
         router.init();
     });

@@ -64,9 +64,9 @@ for(var i in config.controllers) {
 }
 
 /*router request*/
-app.get('/router.js', function(req,res) {
+app.get('/helper/:name', function(req,res) {
     var fs = require('fs');
-    res.send(fs.readFileSync(config.libDir+'router.js', 'utf-8'));
+    res.send(fs.readFileSync(config.libDir+req.param('name'), 'utf-8'));
 });
 
 /*loading templates request*/
