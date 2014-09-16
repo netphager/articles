@@ -10,6 +10,7 @@ define(function(require) {
 
         // add article
         this.add = function(params,template) {
+            dialog.open(template);
         };
 
         // save article
