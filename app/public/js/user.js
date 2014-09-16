@@ -1,10 +1,10 @@
 define(function(require) {
     return new (function() {
-        var router = require('router');
+        var router = require('helper/router');
         var that = this;
 
         this.noTemplate = ['add','remove','login','logout'];
-        
+
         this.add = function() {
             var username = $('input[name=username]').val()
             var email = $('input[name=email]').val();
@@ -50,7 +50,7 @@ define(function(require) {
                 url:'/user/logout'
             },function() {
                 window.location = '/app/#/user/signin';
-            });  
+            });
         };
 
         this.remove = function(params) {
@@ -66,7 +66,6 @@ define(function(require) {
         };
 
         this.signup = function(params) {
-
         }
     })
 });
