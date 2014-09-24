@@ -2,7 +2,6 @@ define(function(require) {
     return new (function() {
         var router = require('helper/router');
         var dialog = require('helper/dialog');
-        console.log(dialog);
         var that = this;
 
         this.noTemplate = ['save','remove','test','update'];

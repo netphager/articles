@@ -80,6 +80,15 @@ app.post('/loadTemplate',function(req,res) {
     }
     res.send(outputHtml);
 });
+app.post('/loadLibTemplate',function(req,res) {
+    console.log(req.body.templateName);
+    var outputHtml = loader.loadLibTemplate(req.body.templateName);
+    if(outputHtml === false) {
+        outputHtml = debug.getErrorsStr();
+    }
+    res.send(outputHtml);
+});
+
 
 /*start server*/
 http.listen(port, function(){
