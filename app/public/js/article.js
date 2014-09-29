@@ -27,6 +27,7 @@ define(function(require) {
 
             }, function(article) {
                 console.log('successfully added article' + article);
+                dialog.close('add');
                 window.location = '/app/#/article/home';
             });
         }
@@ -52,7 +53,7 @@ define(function(require) {
                 url:'/article/show',
                 data: {"id": id}
             }, function(article) {
-                router.render('show');
+                $('[main-template]').html(router.render('show'));
                 $('#article').html('<h2>'+article.title+'</h2><p>'+ article.text+'</p>');
             });
         };
@@ -65,7 +66,7 @@ define(function(require) {
                 url:'/article/edit',
                 data: {"id": id}
             }, function(article) {
-                router.render('edit');
+                $('[main-template]').html(router.render('edit'));
 
                 $('input[name=title]').val(article.title);
                 $('textarea[name=text]').val(article.text);
@@ -99,7 +100,7 @@ define(function(require) {
                 url:'/article/get',
                 data: {"title": ('title' in params ? params.title : null)}
             }, function(articles) {
-                router.render('home',{articles: articles})
+                $('[main-template]').html(router.render('home',{articles: articles}));
 
 
 

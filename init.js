@@ -23,6 +23,7 @@ requestValidator.listen();
 app.use('/public', express.static(config.appDir + '/public'));
 app.use('/node_modules', express.static(config.libDir + '/node_modules'));
 app.use('/templates', express.static(config.appDir + '/templates'));
+app.use('/helper',express.static(config.libDir ));
 app.use(bodyParser.json())
 app.use(expressSession({secret: '123456qwerty'}));
 /* =============================== INITIAL APP =============================== */
@@ -66,10 +67,10 @@ for(var i in config.controllers) {
 }
 
 /*router request*/
-app.get('/helper/:name*', function(req,res) {
+/*app.get('/helper/:name*', function(req,res) {
     var fs = require('fs');
     res.send(fs.readFileSync(req.path.replace('/helper/',config.libDir), 'utf-8'));
-});
+});*/
 
 app.get('/config',function(req,res) {
     res.send(JSON.stringify(config))
@@ -85,7 +86,7 @@ app.get('/config',function(req,res) {
         outputHtml = debug.getErrorsStr();
     }
     res.send(outputHtml);
-});*/
+});
 app.post('/loadLibTemplate',function(req,res) {
     console.log(req.body.templateName);
     var outputHtml = loader.loadLibTemplate(req.body.templateName);
@@ -94,7 +95,7 @@ app.post('/loadLibTemplate',function(req,res) {
     }
     res.send(outputHtml);
 });
-
+*/
 
 /*start server*/
 http.listen(port, function(){

@@ -1,4 +1,0 @@
-<link rel="stylesheet" media="screen" href="/helper/public/css/dialog.css">
-
-<h1>This is dialog {{test}}</h1>
-<div id="dialog"></div>
