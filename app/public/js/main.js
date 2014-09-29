@@ -1,10 +1,10 @@
 require.config({
     paths: {
-        jquery: '/public/js/lib/jquery',
+        jquery: '/helper/node_modules/jquery/dist/jquery.min',
         helper: '/helper',
-        hb: '/node_modules/requirejs-handlebars/hb',
-        text: '/node_modules/requirejs-text/text',
-        handlebars: '/node_modules/handlebars/dist/handlebars'
+        hb: '/helper/node_modules/requirejs-handlebars/hb',
+        text: '/helper/node_modules/requirejs-text/text',
+        handlebars: '/helper/node_modules/handlebars/dist/handlebars'
     }
 });
 
