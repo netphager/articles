@@ -25,7 +25,7 @@ define(function(require) {
             }, function(article) {
                 console.log('successfully added article ' + article._id);
                 dialog.close('add');
-                window.location = '/app/#/article/home';
+                // window.location = '/app/#/article/home';
             });
         }
 
