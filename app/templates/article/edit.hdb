@@ -1,10 +1,10 @@
 <div id="article">
-    
+
     <label>Title</label>
-    <input type="text" name="title" />
+    <input type="text" name="title" value="{{article.title}}" />
     <br />
     <label>Text</label>
-    <textarea name="text"></textarea>
+    <textarea name="text">{{article.text}}</textarea>
     <br />
-    <a href="" class="saveArticle">Save</a>
+    <a href="/app/#/article/update/id/{{article._id}}" class="saveArticle">Save</a>
 </div>

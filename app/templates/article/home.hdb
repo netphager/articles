@@ -19,4 +19,8 @@
 </div>
 
 <h3>Users</h3>
-<div id="users"></div>
+<div id="users">
+    {{#users}}
+        <p>{{this.password}} - {{this.email}} {{this.username}} <a href="/app/#/user/remove/id/{{this._id}}">Remove</a> </p>
+    {{/users}}
+</div>

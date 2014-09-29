@@ -25,7 +25,7 @@ define(function(require) {
         };
 
         this.signin = function() {
-
+            $('[main-template]').html(router.render('signin'));
         };
 
         this.login = function() {
@@ -66,6 +66,7 @@ define(function(require) {
         };
 
         this.signup = function(params) {
+            $('[main-template]').html(router.render('signup'));
         }
     })
 });
