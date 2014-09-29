@@ -21,6 +21,8 @@ requestValidator.eventEmitter = eventEmitter;
 requestValidator.listen();
 /*init sessoin and bodyparser*/
 app.use('/public', express.static(config.appDir + '/public'));
+app.use('/node_modules', express.static('node_modules'));
+app.use('/templates', express.static(config.appDir + '/templates'));
 app.use(bodyParser.json())
 app.use(expressSession({secret: '123456qwerty'}));
 /* =============================== INITIAL APP =============================== */
@@ -64,13 +66,17 @@ for(var i in config.controllers) {
 }
 
 /*router request*/
-app.get('/helper/:name', function(req,res) {
+app.get('/helper/:name*', function(req,res) {
     var fs = require('fs');
-    res.send(fs.readFileSync(config.libDir+req.param('name'), 'utf-8'));
+    res.send(fs.readFileSync(req.path.replace('/helper/',config.libDir), 'utf-8'));
+});
+
+app.get('/config',function(req,res) {
+    res.send(JSON.stringify(config))
 });
 
 /*loading templates request*/
-app.post('/loadTemplate',function(req,res) {
+/*app.post('/loadTemplate',function(req,res) {
     var controllerName = req.body.controllerName;
     var templateName = req.body.templateName;
     var method = req.body.method;
@@ -79,7 +85,7 @@ app.post('/loadTemplate',function(req,res) {
         outputHtml = debug.getErrorsStr();
     }
     res.send(outputHtml);
-});
+});*/
 app.post('/loadLibTemplate',function(req,res) {
     console.log(req.body.templateName);
     var outputHtml = loader.loadLibTemplate(req.body.templateName);

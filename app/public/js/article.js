@@ -1,7 +1,10 @@
 define(function(require) {
     return new (function() {
+
         var router = require('helper/router');
         var dialog = require('helper/dialog');
+        // var myTemplate = require('hb!../../templates/myTemplate.tpl');
+        // console.log(myTemplate());
         var that = this;
 
         this.noTemplate = ['save','remove','test','update'];
@@ -49,6 +52,7 @@ define(function(require) {
                 url:'/article/show',
                 data: {"id": id}
             }, function(article) {
+                router.render('show');
                 $('#article').html('<h2>'+article.title+'</h2><p>'+ article.text+'</p>');
             });
         };
@@ -61,6 +65,8 @@ define(function(require) {
                 url:'/article/edit',
                 data: {"id": id}
             }, function(article) {
+                router.render('edit');
+
                 $('input[name=title]').val(article.title);
                 $('textarea[name=text]').val(article.text);
                 $('a.saveArticle').attr('href','/app/#/article/update/id/'+article._id);
@@ -93,26 +99,33 @@ define(function(require) {
                 url:'/article/get',
                 data: {"title": ('title' in params ? params.title : null)}
             }, function(articles) {
-                var articlesHtml = '';
+                router.render('home',{articles: articles})
+
+
+
+              /*  var articlesHtml = '';
                 for(var i in articles) {
                     articlesHtml += '<div class="article" style="margin:30px;"><p>'+ articles[i].title  +'<br /> '+articles[i].text+'</p> <a href="/app/#/article/show/id/'+articles[i]._id+'">Show</a>'+
                     ' <a href="/app/#/article/edit/id/'+articles[i]._id+'">Edit</a> <a href="/app/#/article/remove/id/'+articles[i]._id+'">Remove</a></div><hr />';
                 }
-                $('#articles').html(articlesHtml);
+                $('#articles').html(articlesHtml);*/
             });
 
             // get users
-             router.makeRequest({
+ /*            router.makeRequest({
                 type:'post',
                 url:'/user/get',
                 data: {"username": ('username' in params ? params.username : null)}
             }, function(users) {
+
+
+
                 var usersHtml = '';
                 for(var i in users) {
                     usersHtml += '<p>'+users[i].password +' - '+ users[i].email  +' '+users[i].username+' <a href="/app/#/user/remove/id/'+users[i]._id+'">Remove</a> </p>';
                 }
                 $('#users').html(usersHtml);
-            });
+            });*/
         };
 
         this.about = function(params) {

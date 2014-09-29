@@ -10,7 +10,7 @@ module.exports = new (function(){
     this.databaseDir = path.join(that.appDir,'database/');
     // this.libDir = path.join('/store/Dropbox/www/framework/');
     this.libDir = path.join('D:\\work\\framework\\');
-    this.templatesDir = path.join(that.appDir, 'templates/{controller}/');
+    this.templatesDir = 'http://localhost:3000/templates/{controller}/';
 
     /* PROPERTIES */
     this.mainApp = 'app';
