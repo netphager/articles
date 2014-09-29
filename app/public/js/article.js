@@ -107,7 +107,7 @@ define(function(require) {
         };
 
         this.about = function(params) {
-            $('[main-template]').html(router.render('about'));
+            $('[main-template]').html(router.render('about',{title: 'Zaglavie'}));
         };
     });
 });
