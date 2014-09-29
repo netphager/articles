@@ -21,7 +21,7 @@ requestValidator.eventEmitter = eventEmitter;
 requestValidator.listen();
 /*init sessoin and bodyparser*/
 app.use('/public', express.static(config.appDir + '/public'));
-app.use('/node_modules', express.static('node_modules'));
+app.use('/node_modules', express.static(config.libDir + '/node_modules'));
 app.use('/templates', express.static(config.appDir + '/templates'));
 app.use(bodyParser.json())
 app.use(expressSession({secret: '123456qwerty'}));

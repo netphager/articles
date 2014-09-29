@@ -1,4 +1,4 @@
-<h2>Add Article</h2>
+<h2>Add Article {{test}}</h2>
 
 <label>Title</label>
 <input type="text" name="articleTitle" />

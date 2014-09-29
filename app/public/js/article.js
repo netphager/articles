@@ -8,11 +8,11 @@ define(function(require) {
         var that = this;
 
         this.noTemplate = ['save','remove','test','update'];
-        this.noReplaceTemplate = ['add'];
+        // this.noReplaceTemplate = ['add'];
 
         // add article
         this.add = function(params,template) {
-            dialog.open(template);
+            dialog.open('add',params);
         };
 
         // save article
