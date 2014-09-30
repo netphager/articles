@@ -6,9 +6,11 @@ define(function(require) {
         this.noTemplate = ['add','remove','login','logout'];
 
         this.add = function() {
-            var username = $('input[name=username]').val()
-            var email = $('input[name=email]').val();
-            var password = $('input[name=password]').val();
+            // var Handlebars = require('handlebars');
+
+            var username = $('[set-value = username]').val()
+            var email = $('[set-value = email]').val();
+            var password = $('[set-value = password]').val();
 
             router.makeRequest({
                 type:'post',

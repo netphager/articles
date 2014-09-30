@@ -1,10 +1,10 @@
 <label>Username: </label>
-<input type="text" name="username"/>
+<input type="text" name="username" set-value="username" value=""/>
 <br />
 <label>Email: </label>
-<input type="text" name="email"/>
+<input type="text" name="email" set-value="email" value=""/>
 <br />
 <label>Password: </label>
-<input type="password" name="password"/>
+<input type="password" name="password" set-value="password" value=""/>
 <br />
 <a href="/app/#/user/add">Sign Up</a>
