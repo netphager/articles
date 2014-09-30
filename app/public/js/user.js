@@ -1,6 +1,7 @@
 define(function(require) {
     return new (function() {
         var router = require('helper/router');
+        var templatesHelper = require('helper/templatesHelper');
         var that = this;
 
         this.noTemplate = ['add','remove','login','logout'];
@@ -27,7 +28,7 @@ define(function(require) {
         };
 
         this.signin = function() {
-            $('[main-template]').html(router.render('signin'));
+            $('[main-template]').html(templatesHelper.render('signin'));
         };
 
         this.login = function() {
@@ -68,7 +69,7 @@ define(function(require) {
         };
 
         this.signup = function(params) {
-            $('[main-template]').html(router.render('signup'));
+            $('[main-template]').html(templatesHelper.render('signup'));
         }
     })
 });

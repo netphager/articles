@@ -2,6 +2,7 @@ define(function(require) {
     return new (function() {
 
         var router = require('helper/router');
+        var templatesHelper = require('helper/templatesHelper');
         var dialog = require('helper/dialog');
         var that = this;
 
@@ -50,7 +51,7 @@ define(function(require) {
                 url:'/article/show',
                 data: {"id": id}
             }, function(article) {
-                $('[main-template]').html(router.render('show',{article: article}));
+                $('[main-template]').html(templatesHelper.render('show',{article: article}));
             });
         };
 
@@ -62,7 +63,7 @@ define(function(require) {
                 url:'/article/edit',
                 data: {"id": id}
             }, function(article) {
-                $('[main-template]').html(router.render('edit',{article: article}));
+                $('[main-template]').html(templatesHelper.render('edit',{article: article}));
             });
         };
 
@@ -98,7 +99,7 @@ define(function(require) {
                     url:'/user/get',
                     data: {"username": ('username' in params ? params.username : null)}
                 }, function(users) {
-                    $('[main-template]').html(router.render('home',{
+                    $('[main-template]').html(templatesHelper.render('home',{
                         articles: articles,
                         users:users
                     }));
@@ -107,7 +108,7 @@ define(function(require) {
         };
 
         this.about = function(params) {
-            $('[main-template]').html(router.render('about',{title: 'Zaglavie'}));
+            $('[main-template]').html(templatesHelper.render('about',{title: 'Zaglavie'}));
         };
     });
 });
