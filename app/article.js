@@ -1,10 +1,9 @@
 module.exports = new (function() {
     var that = this;
     this.init = function() {};
-
     // require db and schemes
-    var db = require(config.libDir+'database');
-    var schemes = require(config.databaseDir+'schemes.js');
+    var db = require(config.libDir+'/api/database');
+    var schemes = require(config.databaseDir+'schemes');
     var mongoose = db.getInstance().mongoose;
 
     // add article
@@ -16,6 +15,12 @@ module.exports = new (function() {
         });
         article.save();
         res.send(article);
+    };
+
+    this.upload = function(req,res) {
+        var uploader = require(config.libDir+'/api/upload');
+        uploader.upload(req.body.file);
+        res.send(req.body.file);
     };
 
     // remove article

@@ -1,4 +1,4 @@
-var db = require(config.libDir+'database');
+var db = require(config.libDir+'/api/database');
 var mongoose = db.getInstance().mongoose;
 var schemes = {};
 module.exports = new (function(){

@@ -1,7 +1,7 @@
 define(function(require) {
     return new (function() {
-        var router = require('helper/router');
-        var templatesHelper = require('helper/templatesHelper');
+        var router = require('helper/js/router');
+        var templatesHelper = require('helper/js/templatesHelper');
         var that = this;
 
         this.noTemplate = ['add','remove','login','logout'];

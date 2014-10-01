@@ -6,4 +6,6 @@
 <label>Text</label>
 <textarea name="articleText"></textarea>
 <br />
+<input type="file" name="fileUpload" multiple />
+<div class="dropFiles"><h2>DROP FILES HERE! </h2></div>
 <a href="/app/#/article/save">Add Article</a>

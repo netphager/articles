@@ -3,7 +3,7 @@ module.exports = new (function() {
     this.init = function() {};
 
     // require db and schemes
-    var db = require(config.libDir+'database');
+    var db = require(config.libDir+'/api/database');
     var schemes = require(config.databaseDir+'schemes.js');
     var mongoose = db.getInstance().mongoose;
 

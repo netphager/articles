@@ -1,14 +1,14 @@
 require.config({
     paths: {
-        jquery: '/helper/node_modules/jquery/dist/jquery.min',
+        jquery: '/lib/jquery/dist/jquery.min',
         helper: '/helper',
-        hb: '/helper/node_modules/requirejs-handlebars/hb',
-        text: '/helper/node_modules/requirejs-text/text',
-        handlebars: '/helper/node_modules/handlebars/dist/handlebars'
+        hb: '/lib/requirejs-handlebars/hb',
+        text: '/lib/requirejs-text/text',
+        handlebars: '/lib/handlebars/dist/handlebars'
     }
 });
 
-require(["jquery","helper/router"], function($,router) {
+require(["jquery","helper/js/router"], function($,router) {
     $(function() {
         router.init();
     });

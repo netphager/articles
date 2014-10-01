@@ -1,9 +1,9 @@
 define(function(require) {
     return new (function() {
 
-        var router = require('helper/router');
-        var templatesHelper = require('helper/templatesHelper');
-        var dialog = require('helper/dialog');
+        var router = require('helper/js/router');
+        var templatesHelper = require('helper/js/templatesHelper');
+        var dialog = require('helper/js/dialog');
         var that = this;
 
         this.noTemplate = ['save','remove','test','update'];
@@ -11,6 +11,11 @@ define(function(require) {
         // add article
         this.add = function(params,template) {
             dialog.open('add',params);
+            $(window).on('dialogOpened', function() {
+                var uploadHelper = require('helper/js/upload');
+                uploadHelper.init($('input[name="fileUpload"]'),$('.dropFiles'));
+            });
+
         };
 
         // save article
@@ -110,6 +115,7 @@ define(function(require) {
         };
 
         this.about = function(params) {
+            // dialog.open('about',{title: 'zaglavie'});
             $('[main-template]').html(templatesHelper.render('about',{title: 'Zaglavie'}));
         };
     });

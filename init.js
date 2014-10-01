@@ -10,11 +10,11 @@ var http = require('http').Server(app);
 var port = 3000;
 
 global.config = require('./config');
-global.debug = require(config.libDir+'debugger');
+global.debug = require(config.libDir+'/api/debugger');
 /*loader module for loading controller,templates and layouts*/
-var loader = require(config.libDir+'loader');
+var loader = require(config.libDir+'/api/loader');
 // db controller to access db
-var db = require(config.libDir+'database');
+var db = require(config.libDir+'/api/database');
 /*request validator*/
 /*requestValidator = require(config.libDir+'requestValidator');
 requestValidator.eventEmitter = eventEmitter;
@@ -22,7 +22,8 @@ requestValidator.listen();*/
 /*init sessoin and bodyparser*/
 app.use('/public', express.static(config.appDir + '/public'));
 app.use('/templates', express.static(config.appDir + '/templates'));
-app.use('/helper',express.static(config.libDir));
+app.use('/helper',express.static(config.libDir+'/public'));
+app.use('/lib',express.static(config.libDir+'/node_modules'));
 app.use(bodyParser.json())
 app.use(expressSession({secret: '123456qwerty'}));
 /* =============================== INITIAL APP =============================== */
