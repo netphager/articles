@@ -70,31 +70,6 @@ app.get('/config',function(req,res) {
     res.send(JSON.stringify(config))
 });
 
-/*app.get('/helper/:name*', function(req,res) {
-    var fs = require('fs');
-    res.send(fs.readFileSync(req.path.replace('/helper/',config.libDir), 'utf-8'));
-});
-
-app.post('/loadTemplate',function(req,res) {
-    var controllerName = req.body.controllerName;
-    var templateName = req.body.templateName;
-    var method = req.body.method;
-    var outputHtml = loader.loadTemplate(templateName,controllerName);
-    if(outputHtml === false) {
-        outputHtml = debug.getErrorsStr();
-    }
-    res.send(outputHtml);
-});
-app.post('/loadLibTemplate',function(req,res) {
-    console.log(req.body.templateName);
-    var outputHtml = loader.loadLibTemplate(req.body.templateName);
-    if(outputHtml === false) {
-        outputHtml = debug.getErrorsStr();
-    }
-    res.send(outputHtml);
-});
-*/
-
 /*start server*/
 http.listen(port, function(){
   debug.log('listening on *:'+port);
