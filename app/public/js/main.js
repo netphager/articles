@@ -8,12 +8,8 @@ require.config({
     }
 });
 
-require(["jquery","helper/router",'handlebars'], function($,router,Handlebars) {
+require(["jquery","helper/router"], function($,router) {
     $(function() {
-
-
-
-
         router.init();
     });
 

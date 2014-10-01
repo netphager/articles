@@ -28,7 +28,7 @@ define(function(require) {
                 dialog.close('add');
                 // window.location = '/app/#/article/home';
             });
-        }
+        };
 
         // remove article
         this.remove = function(params) {
@@ -63,6 +63,7 @@ define(function(require) {
                 url:'/article/edit',
                 data: {"id": id}
             }, function(article) {
+                // dialog.open('edit',{article:article});
                 $('[main-template]').html(templatesHelper.render('edit',{article: article}));
             });
         };
@@ -82,6 +83,7 @@ define(function(require) {
                 }
             }, function(article) {
                 console.log('successfully updated article '+ article._id);
+                // dialog.close('edit');
                 window.location = '/app/#/article/home';
             });
         };
