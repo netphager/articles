@@ -18,7 +18,7 @@ define(function(require) {
 
         };
 
-        this.upload = function(filePreviews) {
+        this.uploadComplete = function(filePreviews) {
             for(var i in filePreviews) {
                 $('input[name="fileUpload"]').after('<img src="'+filePreviews[i]+'" height="50"/>')
             }
