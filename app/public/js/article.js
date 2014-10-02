@@ -8,16 +8,18 @@ define(function(require) {
 
         this.noTemplate = ['save','remove','test','update'];
 
+        router.makeRequest({
+            type:'get',
+            url: '/article/listenUploadComplete'
+        });
+
         // add article
         this.add = function(params,template) {
             dialog.open('add',params);
         };
 
         this.upload = function(params,template) {
-            router.makeRequest({
-                type:'get',
-                url: '/article/listenUploadComplete'
-            });
+
 
             dialog.open('upload',params);
 

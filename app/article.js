@@ -24,14 +24,21 @@ module.exports = new (function() {
     this.listenUploadComplete = function(req,res) {
         EventEmitter.on('uploadComplete',function(files) {
             var Attachment = mongoose.model('Attachment',schemes.attachmentSchema);
-            console.log(files);
+            // files = files.files;
+            if(!(files instanceof Array)) {
+                files = [files];
+            }
+            var attachments = [];
             for(var i = 0 ; i <  files.length; i++) {
-                var attachment = new Attachment({
+                attachments.push({
                     name: files[i].originalname,
                     path: files[i].path
                 });
-                attachment.save();
             }
+            var Attachment = mongoose.model('Attachment',schemes.attachmentSchema);
+            Attachment.collection.insert(attachments,{},function(err,a) {
+                console.log(a);
+            });
         });
 
         res.send({"success": true});
