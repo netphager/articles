@@ -3,7 +3,7 @@ module.exports = new (function() {
     this.init = function() {};
 
     // require db and schemes
-    var db = require(config.libDir+'/api/database');
+    var db = require(config.libDir+'/lib/database');
     var schemes = require(config.databaseDir+'schemes.js');
     var mongoose = db.getInstance().mongoose;
 
@@ -38,7 +38,6 @@ module.exports = new (function() {
         user.save();
         res.send(user);
     }
-
 
     // remove user
     this.remove = function(req,res) {

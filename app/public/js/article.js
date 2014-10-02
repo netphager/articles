@@ -18,6 +18,12 @@ define(function(require) {
 
         };
 
+        this.upload = function(filePreviews) {
+            for(var i in filePreviews) {
+                $('input[name="fileUpload"]').after('<img src="'+filePreviews[i]+'" height="50"/>')
+            }
+        };
+
         // save article
         this.save = function(){
             var title = $('input[name=articleTitle]').val();
