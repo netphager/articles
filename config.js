@@ -14,7 +14,7 @@ module.exports = new (function(){
 
     /* PROPERTIES */
     this.mainApp = 'app';
-    this.controllers = ['user','article','test','upload'];
+    this.controllers = ['user','article','test'];
 
     this.loginConfig = {
         requireLogin: true,
