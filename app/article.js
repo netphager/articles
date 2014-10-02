@@ -1,10 +1,13 @@
 module.exports = new (function() {
     var that = this;
-    this.init = function() {};
+    var EventEmitter = require(config.libDir+"/lib/emitter").getInstance();
+
     // require db and schemes
     var db = require(config.libDir+'/lib/database');
     var schemes = require(config.databaseDir+'schemes');
     var mongoose = db.getInstance().mongoose;
+
+
 
     // add article
     this.add = function(req,res) {
@@ -17,6 +20,22 @@ module.exports = new (function() {
         res.send(article);
     };
 
+    // uplaod complete listener
+    this.listenUploadComplete = function(req,res) {
+        EventEmitter.on('uploadComplete',function(files) {
+            var Attachment = mongoose.model('Attachment',schemes.attachmentSchema);
+            console.log(files);
+            for(var i = 0 ; i <  files.length; i++) {
+                var attachment = new Attachment({
+                    name: files[i].originalname,
+                    path: files[i].path
+                });
+                attachment.save();
+            }
+        });
+
+        res.send({"success": true});
+    };
 
     // remove article
     this.remove = function(req,res) {
@@ -62,6 +81,15 @@ module.exports = new (function() {
             article.text = req.body.text;
             article.save();
             res.send(article);
+        });
+    };
+
+    // get attachments
+    this.getAttachments = function(req,res) {
+        var Attachment = mongoose.model('Attachment',schemes.attachmentSchema);
+
+        Attachment.find({},function(err,attachments) {
+            res.send(attachments);
         });
     };
 

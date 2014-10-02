@@ -24,6 +24,7 @@ app.use('/public', express.static(config.appDir + '/public'));
 app.use('/templates', express.static(config.appDir + '/templates'));
 app.use('/helper',express.static(config.libDir+'/public'));
 app.use('/lib',express.static(config.libDir+'/node_modules'));
+app.use('/uploads', express.static('./uploads'));
 var multer  = require('multer');
 app.use(multer({ dest: './uploads'}))
 app.use(bodyParser.json())

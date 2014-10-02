@@ -11,17 +11,26 @@ define(function(require) {
         // add article
         this.add = function(params,template) {
             dialog.open('add',params);
+        };
+
+        this.upload = function(params,template) {
+            router.makeRequest({
+                type:'get',
+                url: '/article/listenUploadComplete'
+            });
+
+            dialog.open('upload',params);
+
             $(window).on('dialogOpened', function() {
                 var uploadHelper = require('helper/js/upload');
                 uploadHelper.init($('input[name="fileUpload"]'),$('.dropFiles'));
             });
 
-        };
-
-        this.uploadComplete = function(filePreviews) {
-            for(var i in filePreviews) {
-                $('input[name="fileUpload"]').after('<img src="'+filePreviews[i]+'" height="50"/>')
-            }
+            $(window).on('uploadComplete', function(e) {
+                for(var i in e.filePreviews) {
+                    $('input[name="fileUpload"]').after('<img src="'+e.filePreviews[i]+'" height="50"/>')
+                }
+            });
         };
 
         // save article
@@ -112,10 +121,17 @@ define(function(require) {
                     url:'/user/get',
                     data: {"username": ('username' in params ? params.username : null)}
                 }, function(users) {
-                    $('[main-template]').html(templatesHelper.render('home',{
-                        articles: articles,
-                        users:users
-                    }));
+                    // get attachments
+                    router.makeRequest({
+                        type:'post',
+                        url:'/article/getAttachments',
+                    }, function(attachments) {
+                        $('[main-template]').html(templatesHelper.render('home',{
+                            articles: articles,
+                            users:users,
+                            attachments: attachments
+                        }));
+                    });
                 });
             });
         };

@@ -10,6 +10,11 @@ module.exports = new (function(){
         password: String
     });
 
+    schemes.attachmentSchema = mongoose.Schema({
+        name: String,
+        path: String
+    });
+
     schemes.articleSchema = mongoose.Schema({
         title: String,
         text: String
