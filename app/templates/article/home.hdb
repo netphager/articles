@@ -25,9 +25,12 @@
         <p>{{this.password}} - {{this.email}} {{this.username}} <a href="/app/#/user/remove/id/{{this._id}}">Remove</a> </p>
     {{/users}}
 </div>
-
+<hr />
 <div id="attachments">
     {{#attachments}}
-        <img height="50" src="/{{this.path}}" /> - <a href="/app/#/article/removeAttachment/id/{{this._id}}">Remove</a>
+        <p>{{this.name}}</p>
+        <a target="_blank" href="/{{this.path}}">
+            <img height="50" src="/{{this.path}}" /> - <a href="/app/#/article/removeAttachment/id/{{this._id}}">Remove</a>
+        </a>
     {{/attachments}}
 </div>

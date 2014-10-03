@@ -26,7 +26,7 @@ module.exports = new (function() {
             res.send({"msg": "server listening now"});
             return;
         }
-        EventEmitter.on('uploadComplete',function(files) {
+        EventEmitter.on('saveAttachments',function(files) {
             listenNow = true;
             var Attachment = mongoose.model('Attachment',schemes.attachmentSchema);
             // files = files.files;

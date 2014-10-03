@@ -37,7 +37,7 @@ define(function(require) {
                 url: '/article/removeAttachment',
                 data: {"id": params.id}
             }, function() {
-                console.log('successfully removed article ' + params.id);
+                console.log('successfully removed attachment ' + params.id);
                 window.location = '/app/#/article/home';
             });
         };
