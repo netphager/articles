@@ -8,7 +8,7 @@ module.exports = new (function() {
     var mongoose = db.getInstance().mongoose;
 
 
-
+    var listenNow = false;
     // add article
     this.add = function(req,res) {
         var Article = mongoose.model('Article',schemes.articleSchema);
@@ -22,7 +22,12 @@ module.exports = new (function() {
 
     // uplaod complete listener
     this.listenUploadComplete = function(req,res) {
+        if(listenNow) {
+            res.send({"msg": "server listening now"});
+            return;
+        }
         EventEmitter.on('uploadComplete',function(files) {
+            listenNow = true;
             var Attachment = mongoose.model('Attachment',schemes.attachmentSchema);
             // files = files.files;
             if(!(files instanceof Array)) {
@@ -36,12 +41,18 @@ module.exports = new (function() {
                 });
             }
             var Attachment = mongoose.model('Attachment',schemes.attachmentSchema);
-            Attachment.collection.insert(attachments,{},function(err,a) {
-                console.log(a);
-            });
+            Attachment.collection.insert(attachments,{},function(err,a) {});
         });
 
         res.send({"success": true});
+    };
+
+
+    this.removeAttachment = function(req,res) {
+        var Attachment = mongoose.model('Attachment',schemes.attachmentSchema);
+        Attachment.findByIdAndRemove(new mongoose.Types.ObjectId(req.body.id),function() {
+            res.send(req.body.id);
+        });
     };
 
     // remove article

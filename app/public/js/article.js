@@ -6,12 +6,21 @@ define(function(require) {
         var dialog = require('helper/js/dialog');
         var that = this;
 
-        this.noTemplate = ['save','remove','test','update'];
+        this.noTemplate = ['save','remove','test','update','removeAttachment'];
 
+        // listen for upload complete
         router.makeRequest({
             type:'get',
             url: '/article/listenUploadComplete'
         });
+        $(window).on('dialogOpened', function() {
+            // init uploader
+            if($('input[name="fileUpload"]').length > 0) {
+                var uploadHelper = require('helper/js/upload');
+                uploadHelper.init($('input[name="fileUpload"]'),$('.dropFiles'));
+            }
+        });
+
 
         // add article
         this.add = function(params,template) {
@@ -19,19 +28,17 @@ define(function(require) {
         };
 
         this.upload = function(params,template) {
-
-
             dialog.open('upload',params);
+        };
 
-            $(window).on('dialogOpened', function() {
-                var uploadHelper = require('helper/js/upload');
-                uploadHelper.init($('input[name="fileUpload"]'),$('.dropFiles'));
-            });
-
-            $(window).on('uploadComplete', function(e) {
-                for(var i in e.filePreviews) {
-                    $('input[name="fileUpload"]').after('<img src="'+e.filePreviews[i]+'" height="50"/>')
-                }
+        this.removeAttachment = function(params) {
+            router.makeRequest({
+                type: 'post',
+                url: '/article/removeAttachment',
+                data: {"id": params.id}
+            }, function() {
+                console.log('successfully removed article ' + params.id);
+                window.location = '/app/#/article/home';
             });
         };
 
