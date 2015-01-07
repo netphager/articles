@@ -28,7 +28,6 @@ module.exports = new (function() {
         }
         EventEmitter.on('saveAttachments',function(files) {
             listenNow = true;
-            var Attachment = mongoose.model('Attachment',schemes.attachmentSchema);
             // files = files.files;
             if(!(files instanceof Array)) {
                 files = [files];
@@ -40,6 +39,7 @@ module.exports = new (function() {
                     path: files[i].path
                 });
             }
+
             var Attachment = mongoose.model('Attachment',schemes.attachmentSchema);
             Attachment.collection.insert(attachments,{},function(err,a) {});
         });
