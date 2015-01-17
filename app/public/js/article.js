@@ -2,7 +2,7 @@ define(function(require) {
     return new (function() {
 
         var router = require('helper/js/router');
-        var templatesHelper = require('helper/js/templatesHelper');
+        var template = require('helper/js/template');
         var dialog = require('helper/js/dialog');
         var that = this;
 
@@ -23,6 +23,7 @@ define(function(require) {
 
         // add article
         this.add = function(params,template) {
+            console.log(params,template);
             dialog.open('add',params);
         };
 
@@ -79,7 +80,7 @@ define(function(require) {
                 url:'/article/show',
                 data: {"id": id}
             }, function(article) {
-                $('[main-template]').html(templatesHelper.render('show',{article: article}));
+                $('[main-template]').html(template.render('show',{article: article}));
             });
         };
 
@@ -92,7 +93,7 @@ define(function(require) {
                 data: {"id": id}
             }, function(article) {
                 // dialog.open('edit',{article:article});
-                $('[main-template]').html(templatesHelper.render('edit',{article: article}));
+                $('[main-template]').html(template.render('edit',{article: article}));
             });
         };
 
@@ -134,7 +135,7 @@ define(function(require) {
                         type:'post',
                         url:'/article/getAttachments',
                     }, function(attachments) {
-                        $('[main-template]').html(templatesHelper.render('home',{
+                        $('[main-template]').html(template.render('home',{
                             articles: articles,
                             users:users,
                             attachments: attachments
@@ -146,7 +147,7 @@ define(function(require) {
 
         this.about = function(params) {
             // dialog.open('about',{title: 'zaglavie'});
-            $('[main-template]').html(templatesHelper.render('about',{title: 'Zaglavie'}));
+            $('[main-template]').html(template.render('about',{title: 'Zaglavie'}));
         };
     });
 });

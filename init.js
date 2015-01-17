@@ -67,18 +67,6 @@ for(var i in config.controllers) {
     });
 }
 
-// api requests
-app.all('/api/:controller/:method',function(req,res) {
-    var controllerName = req.param('controller');
-    var method = req.param('method');
-
-    if(!(controllerName in loadedControllers)) {
-        loadedControllers[controllerName] = loader.loadController(config.libDir+'/api/'+req.param('controller'),controllerName);
-        console.log('loading api controller ' + controllerName);
-    }
-    loadedControllers[controllerName][method](req,res);
-});
-
 app.get('/config',function(req,res) {
     res.send(JSON.stringify(config))
 });
