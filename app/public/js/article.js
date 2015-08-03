@@ -31,6 +31,12 @@ define(function(require) {
             dialog.open('upload',params);
         };
 
+        this.test = function () {
+            template.loadTemplate('about','../../templates/article/',function() {
+                $('[main-template]').html(template.render('about'));
+            });
+        };
+
         this.removeAttachment = function(params) {
             router.makeRequest({
                 type: 'post',

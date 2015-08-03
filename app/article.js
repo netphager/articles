@@ -47,6 +47,9 @@ module.exports = new (function() {
         res.send({"success": true});
     };
 
+    this.test = function () {
+
+    };
 
     this.removeAttachment = function(req,res) {
         var Attachment = mongoose.model('Attachment',schemes.attachmentSchema);
