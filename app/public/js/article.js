@@ -25,7 +25,7 @@ define(function(require) {
         this.add = function(params,template) {
             console.log(params,template);
             dialog.open('add',params);
-        }; 
+        };
 
         this.upload = function(params,template) {
             dialog.open('upload',params);
