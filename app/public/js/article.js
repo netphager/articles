@@ -6,7 +6,7 @@ define(function(require) {
         var dialog = require('helper/js/dialog');
         var that = this;
 
-        this.noTemplate = ['save','remove','test','update','removeAttachment'];
+        this.noTemplate = ['save','remove','update','removeAttachment'];
 
         // listen for upload complete
         router.makeRequest({

@@ -5,12 +5,12 @@ define(function(require) {
         var router = require('helper/js/router');
 
         this.index = function(params) {
-            router.makeRequest({
+            /*router.makeRequest({
                 type: 'post',
                 url: '/test/index',
-            }, function() {
-                $('[main-template]').html(template.render('index',params));
-            });
+            }, function() {*/
+                $('[main-template]').html(dialog.open('index',params));
+            // });
 
         };
     });
